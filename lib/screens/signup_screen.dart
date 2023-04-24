@@ -27,6 +27,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _userNameController.dispose();
 
   }
+
+  selectImage(){
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +61,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     bottom: -12,
                     left: 80,
                     child: IconButton(
-                      onPressed: (){},
+                      onPressed: selectImage,
                       icon: const Icon(Icons.add_a_photo),
                     ),
                   )
