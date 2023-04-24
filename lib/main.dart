@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/responsive/mobileScreenLayout.dart';
 import 'package:instagram_clone/responsive/responsive_layout_screen.dart';
 import 'package:instagram_clone/responsive/webScreenLayout.dart';
+import 'package:instagram_clone/screens/login_screen.dart';
 import 'package:instagram_clone/utils/colors.dart';
 
 void main() async {
@@ -35,9 +36,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: mobileBackgroundColor),
       title: 'Instagram Clone',
       debugShowCheckedModeBanner: false,
-      home:const ResponsiveLayout(
-          mobileScreenLayout: MobileScreenLayout() ,
-          webScreenLayout: WebScreenLayout())
+      // home:const ResponsiveLayout(
+      //     mobileScreenLayout: MobileScreenLayout() ,
+      //     webScreenLayout: WebScreenLayout())
+      home: const LoginScreen(),
     );
   }
 }
