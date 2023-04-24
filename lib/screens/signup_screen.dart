@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_clone/widgets/text_field.dart';
-
 import '../utils/colors.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -35,25 +34,25 @@ class _LoginScreenState extends State<LoginScreen> {
               Flexible(flex: 2, child: Container()),
               //logo image
               SvgPicture.asset("assets/ic_instagram.svg",
-                color: primaryColor,
-                height: 64),
+                  color: primaryColor,
+                  height: 64),
 
               const SizedBox(height: 64),
-              
+
               // email text field input
-                  TextFieldInput(
-                    hintText: "Enter your Email Address",
-                    textEditingController:_emailTextEditingController ,
-                    textInputType: TextInputType.emailAddress,
-                  ),
-              
+              TextFieldInput(
+                hintText: "Enter your Email Address",
+                textEditingController:_emailTextEditingController ,
+                textInputType: TextInputType.emailAddress,
+              ),
+
               const SizedBox(height: 24),
-              
+
               // password text field input
               TextFieldInput(textEditingController: _passwordTextEditingController,
-                  textInputType: TextInputType.text,
-                  hintText: "Enter your password",
-                  isPassword : true,
+                textInputType: TextInputType.text,
+                hintText: "Enter your password",
+                isPassword : true,
               ),
               const SizedBox(height: 24),
               // login container
@@ -65,12 +64,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: const ShapeDecoration(
                       color: blueColor,
                       shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4) ) )
+                          borderRadius: BorderRadius.all(Radius.circular(4) ) )
                   ),
                   child: const Text("Login"),
                 ),
               ),
-              
+
               Flexible(flex: 2, child: Container()),
               //whether the user has an account or not
               Row(
@@ -96,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ],),
         ),
       ),
-      
+
     );
   }
 }
