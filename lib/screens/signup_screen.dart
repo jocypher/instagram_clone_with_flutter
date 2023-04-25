@@ -1,8 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/resources/auth_methods.dart';
 import 'package:instagram_clone/widgets/text_field.dart';
 import '../utils/colors.dart';
+import "package:instagram_clone/utils/utils.dart";
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -17,6 +20,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordTextEditingController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _userNameController = TextEditingController();
+  Uint8List? _image;
 
   @override
   void dispose() {
@@ -28,8 +32,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   }
 
-  selectImage(){
-
+  selectImage() async{
+    Uint8List im = await pickImage(ImageSource.gallery);
+    setState(() {
+      _image = im;
+    });
   }
   @override
   Widget build(BuildContext context) {
@@ -51,10 +58,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 // circle avatar for profile image
               Stack(
                 children: [
-                  const CircleAvatar(
+                  _image != null?
+                CircleAvatar(
+                  radius : 64,
+                  backgroundImage: MemoryImage(_image!)) :
+                const CircleAvatar(
                     radius : 64,
                     backgroundImage: NetworkImage(
-                        "https://images.unsplash.com/photo-1682193965136-c8650b543426?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNnx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
+                        networkImage
                     )
                   ),
                   Positioned(
@@ -109,7 +120,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       email: _emailTextEditingController.text,
                       password: _passwordTextEditingController.text,
                       bio: _bioController.text,
-                      username: _userNameController.text);
+                      username: _userNameController.text,
+                      file: _image!
+                  );
                   print(res);
                 },
                 child: Container(

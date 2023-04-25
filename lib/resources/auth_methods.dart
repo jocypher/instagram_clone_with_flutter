@@ -13,11 +13,11 @@ class AuthMethods{
     required String password,
     required String bio,
     required String username,
-    // required Uint8List file
+    required Uint8List file
 }) async{
     String res = "an error occured";
     try{
-      if(email.isNotEmpty || password.isNotEmpty || bio.isNotEmpty || username.isNotEmpty){
+      if(email.isNotEmpty || password.isNotEmpty || bio.isNotEmpty || username.isNotEmpty || file != null){
         UserCredential credential = await _auth.createUserWithEmailAndPassword(email: email, password: password);
 
         print(credential.user!.uid);
