@@ -21,6 +21,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _userNameController = TextEditingController();
   Uint8List? _image;
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -29,7 +30,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _passwordTextEditingController.dispose();
     _bioController.dispose();
     _userNameController.dispose();
-
   }
 
   selectImage() async{
@@ -38,6 +38,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
       _image = im;
     });
   }
+
+  void signUpUser() async {
+    setState(() {
+      _isLoading = true;
+    });
+    String res = await AuthMethods().SignUpUser(
+        email: _emailTextEditingController.text,
+        password: _passwordTextEditingController.text,
+        bio: _bioController.text,
+        username: _userNameController.text,
+        file: _image!
+    );
+    setState(() {
+      _isLoading = false;
+    });
+    if(res != 'success'){
+      showSnackBar(res, context);
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,16 +136,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
               // login container
               InkWell(
-                onTap: () async {
-                  String res = await AuthMethods().SignUpUser(
-                      email: _emailTextEditingController.text,
-                      password: _passwordTextEditingController.text,
-                      bio: _bioController.text,
-                      username: _userNameController.text,
-                      file: _image!
-                  );
-                  print(res);
-                },
+                onTap: signUpUser,
                 child: Container(
                   width: double.infinity,
                   alignment: Alignment.center,
@@ -132,9 +144,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   decoration: const ShapeDecoration(
                       color: blueColor,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(4) ) )
+                          borderRadius: BorderRadius.all(Radius.circular(4)))
                   ),
-                  child: const Text("Sign Up"),
+                  child: _isLoading ? const Center(
+                    child: CircularProgressIndicator(
+                      color: primaryColor,
+                    ),
+                  ) : const Text("Sign Up"),
                 ),
               ),
 

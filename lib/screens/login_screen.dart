@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:instagram_clone/resources/auth_methods.dart';
+import 'package:instagram_clone/utils/utils.dart';
 import 'package:instagram_clone/widgets/text_field.dart';
 
 import '../utils/colors.dart';
@@ -14,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailTextEditingController = TextEditingController();
   final TextEditingController _passwordTextEditingController = TextEditingController();
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -21,6 +24,24 @@ class _LoginScreenState extends State<LoginScreen> {
     _emailTextEditingController.dispose();
     _passwordTextEditingController.dispose();
 
+  }
+
+  void loginUser() async{
+    setState(() {
+      _isLoading = true;
+    });
+    String res = await AuthMethods().LoginUser(
+        email: _emailTextEditingController.text,
+        password: _passwordTextEditingController.text);
+    if(res == 'success') {
+      showSnackBar(res, context);
+    }else{
+      showSnackBar(res, context);
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
   }
   @override
   Widget build(BuildContext context) {
@@ -58,6 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 24),
               // login container
               InkWell(
+                onTap: loginUser,
                 child: Container(
                   width: double.infinity,
                   alignment: Alignment.center,
@@ -67,7 +89,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(4) ) )
                   ),
-                  child: const Text("Login"),
+                  child: _isLoading ? const Center(child:
+                        CircularProgressIndicator(color: primaryColor)
+                  ) : const Text("Login"),
                 ),
               ),
               
