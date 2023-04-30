@@ -1,0 +1,59 @@
+import 'package:flutter/material.dart';
+import 'package:instagram_clone/utils/colors.dart';
+
+class CommentScreen extends StatefulWidget {
+  const CommentScreen({Key? key}) : super(key: key);
+
+  @override
+  State<CommentScreen> createState() => _CommentScreenState();
+}
+
+class _CommentScreenState extends State<CommentScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: mobileBackgroundColor,
+        title: const Text("comments"),
+        centerTitle: false,
+      ),
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          height: kToolbarHeight,
+          margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding: const EdgeInsets.only(left: 16, right: 8),
+          child: Row(
+            children:  [
+              const CircleAvatar(
+                backgroundImage: NetworkImage("https://images.unsplash.com/photo-1682289571993-32a168b263bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzOHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"),
+                radius: 16,
+              ),
+              const Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 16.0, right: 8.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: "comment section",
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: (){},
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                  child: const Text(
+                    'posts',
+                    style: TextStyle(color: blueColor)
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
