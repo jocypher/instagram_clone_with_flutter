@@ -1,21 +1,55 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/utils/colors.dart';
+import 'package:instagram_clone/widgets/comment_card.dart';
+import 'package:provider/provider.dart';
+
+import '../models/user.dart';
+import '../providers/user_provider.dart';
+import '../resources/firestore_methods.dart';
 
 class CommentScreen extends StatefulWidget {
-  const CommentScreen({Key? key}) : super(key: key);
+  final snap;
+  const CommentScreen({Key? key, required this.snap}) : super(key: key);
 
   @override
   State<CommentScreen> createState() => _CommentScreenState();
 }
 
 class _CommentScreenState extends State<CommentScreen> {
+  final TextEditingController _commentController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _commentController.dispose();
+  }
   @override
   Widget build(BuildContext context) {
+    final User user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: mobileBackgroundColor,
         title: const Text("comments"),
         centerTitle: false,
+      ),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.
+        instance.collection('posts').
+        doc(widget.snap['postId']).
+        collection('comments').
+        orderBy('datePublished', descending: true).
+        snapshots(),
+        builder: (context, snapshot){
+          if(snapshot.connectionState == ConnectionState.waiting){
+            return const Center(child: CircularProgressIndicator());
+          }
+          return ListView.builder(
+            itemCount: (snapshot.data! as dynamic).docs.length,
+              itemBuilder: (context, index)=>  CommentCard(
+                snap: (snapshot.data! as dynamic).docs[index].data()
+              ));
+        }
       ),
       bottomNavigationBar: SafeArea(
         child: Container(
@@ -28,19 +62,28 @@ class _CommentScreenState extends State<CommentScreen> {
                 backgroundImage: NetworkImage("https://images.unsplash.com/photo-1682289571993-32a168b263bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzOHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"),
                 radius: 16,
               ),
-              const Expanded(
+               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.only(left: 16.0, right: 8.0),
+                  padding: const EdgeInsets.only(left: 16.0, right: 8.0),
                   child: TextField(
+                    controller: _commentController,
                     decoration: InputDecoration(
-                      hintText: "comment section",
+                      hintText: "comment as ${user.username}",
                       border: InputBorder.none,
                     ),
                   ),
                 ),
               ),
               InkWell(
-                onTap: (){},
+                onTap: () async{
+                  FireStoreMethods().postComment(widget.snap['postId'],
+                      user.uid,
+                      _commentController.text,
+                      user.username, user.photoUrl);
+                  setState(() {
+                    _commentController.text = '';
+                  });
+                },
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                   child: const Text(

@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:instagram_clone/models/post.dart';
 import 'package:instagram_clone/resources/storage_method.dart';
@@ -49,6 +48,35 @@ class FireStoreMethods{
           'likes': FieldValue.arrayUnion([uid])
         });
       }
+    }catch(err){
+      print(err.toString());
+    }
+  }
+
+  Future<void>postComment(String postId, String uid, String text, String username, String profilePic) async{
+    try{
+    if(text.isNotEmpty){
+      String commentId = const Uuid().v1();
+      await _firestore.collection('posts').doc(postId).collection('comments').doc(commentId).set({
+        'profilePic': profilePic,
+        'name': username,
+        'uid': uid,
+        'text': text,
+        'commentId': commentId,
+        'datePublished': DateTime.now()
+
+      });
+    }else{
+      print('Text is empty');
+    }
+    }catch(err){
+      print(err.toString());
+    }
+  }
+
+  Future<void> deletePost(String postId) async{
+    try{
+     await _firestore.collection('posts').doc(postId).delete();
     }catch(err){
       print(err.toString());
     }
