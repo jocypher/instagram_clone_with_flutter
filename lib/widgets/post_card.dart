@@ -56,7 +56,7 @@ class _PostCardState extends State<PostCard> {
               children: [
                   CircleAvatar(
                   backgroundImage:
-                  NetworkImage("https://images.unsplash.com/photo-1682289571993-32a168b263bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzOHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"),
+                  NetworkImage(widget.snap["postUrl"]),
                 ),
 
                 //username section
@@ -111,7 +111,7 @@ class _PostCardState extends State<PostCard> {
                 SizedBox(
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height * 0.5,
-                  child: Image.network('https://images.unsplash.com/photo-1682289571993-32a168b263bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzOHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
+                  child: Image.network(widget.snap['postImage'],
                     fit: BoxFit.cover,
                   ),
                 ),

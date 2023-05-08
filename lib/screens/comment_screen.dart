@@ -58,8 +58,8 @@ class _CommentScreenState extends State<CommentScreen> {
           padding: const EdgeInsets.only(left: 16, right: 8),
           child: Row(
             children:  [
-              const CircleAvatar(
-                backgroundImage: NetworkImage("https://images.unsplash.com/photo-1682289571993-32a168b263bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzOHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"),
+               CircleAvatar(
+                backgroundImage: NetworkImage(user.photoUrl),
                 radius: 16,
               ),
                Expanded(
@@ -79,7 +79,9 @@ class _CommentScreenState extends State<CommentScreen> {
                   FireStoreMethods().postComment(widget.snap['postId'],
                       user.uid,
                       _commentController.text,
-                      user.username, user.photoUrl);
+                      user.username,
+                      user.photoUrl
+                  );
                   setState(() {
                     _commentController.text = '';
                   });

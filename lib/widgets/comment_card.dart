@@ -17,8 +17,8 @@ class _CommentCardState extends State<CommentCard> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
       child: Row(
         children: [
-          const CircleAvatar(
-            backgroundImage: NetworkImage('https://images.unsplash.com/photo-1682289571993-32a168b263bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzOHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60'),
+          CircleAvatar(
+            backgroundImage: NetworkImage(widget.snap['photoUrl']),
             radius: 18,
           ),
           Expanded(

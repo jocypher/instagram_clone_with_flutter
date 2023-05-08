@@ -5,6 +5,7 @@ import 'package:instagram_clone/responsive/mobileScreenLayout.dart';
 import 'package:instagram_clone/responsive/responsive_layout_screen.dart';
 import 'package:instagram_clone/responsive/webScreenLayout.dart';
 import 'package:instagram_clone/screens/signup_screen.dart';
+import 'package:instagram_clone/utils/global_variables.dart';
 import 'package:instagram_clone/utils/utils.dart';
 import 'package:instagram_clone/widgets/text_field.dart';
 
@@ -60,9 +61,10 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
+        child:  Container(
           width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 32),
+          padding: MediaQuery.of(context).size.width > webScreenSize ? EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/ 3):
+          const EdgeInsets.symmetric(horizontal: 32) ,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children:  [
