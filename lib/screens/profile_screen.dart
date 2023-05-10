@@ -178,10 +178,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     childAspectRatio: 1
                   ), itemBuilder: (context, index){
                   DocumentSnapshot snap = (snapshot.data! as dynamic).docs[index];
+                  // ignore: avoid_unnecessary_containers
                   return Container(
                     child: Image(
                       image: NetworkImage(
-                          (snap.data! as dynamic)['postUrl']
+                          (snap.data as dynamic)['postUrl']
                       ),
                     ),
                   );

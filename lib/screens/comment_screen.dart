@@ -9,6 +9,7 @@ import '../providers/user_provider.dart';
 import '../resources/firestore_methods.dart';
 
 class CommentScreen extends StatefulWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final snap;
   const CommentScreen({Key? key, required this.snap}) : super(key: key);
 

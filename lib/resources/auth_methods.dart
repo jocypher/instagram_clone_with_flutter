@@ -18,6 +18,7 @@ class AuthMethods{
   }
 
   // signup user
+  // ignore: non_constant_identifier_names
   Future<String>SignUpUser({
     required String email,
     required String password,
@@ -55,6 +56,7 @@ class AuthMethods{
   }
 
   // Login User
+  // ignore: non_constant_identifier_names
   Future<String>LoginUser({required String email, required String password})async{
     String res= 'an error occurred';
     try{

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_clone/utils/colors.dart';
@@ -66,9 +68,9 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
         ],
       ),
       body: PageView(
-        children: homeScreenItems,
         onPageChanged: onPageChanged,
         controller: pageController,
+        children: homeScreenItems,
       ),
     );
   }

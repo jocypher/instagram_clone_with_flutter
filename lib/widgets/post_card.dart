@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import '../models/user.dart';
 
 class PostCard extends StatefulWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final snap;
   const PostCard({Key? key, required this.snap}) : super(key: key);
 
@@ -68,7 +69,7 @@ class _PostCardState extends State<PostCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                       Text(widget.snap['username'],
-                      style: TextStyle(fontWeight: FontWeight.bold),)
+                      style: const TextStyle(fontWeight: FontWeight.bold),)
                   ]
                       )
                     )
@@ -166,8 +167,8 @@ class _PostCardState extends State<PostCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 DefaultTextStyle(
-                  style: Theme.of(context).textTheme.subtitle2!.copyWith(fontWeight: FontWeight.w800),
-                    child: Text('${widget.snap['likes'].length} likes', style: Theme.of(context).textTheme.bodyText2,)),
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w800),
+                    child: Text('${widget.snap['likes'].length} likes', style: Theme.of(context).textTheme.bodyMedium,)),
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.only(top: 9),
@@ -193,7 +194,7 @@ class _PostCardState extends State<PostCard> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical:3),
                     child: Text('view all $commentLen comments',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 15,
                         color: secondaryColor
                       ),
@@ -205,7 +206,7 @@ class _PostCardState extends State<PostCard> {
                   child: Text(
                     DateFormat.yMMMd().format(widget.snap['datePublished'].toDate())
                     ,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 15,
                         color: secondaryColor
                     ),

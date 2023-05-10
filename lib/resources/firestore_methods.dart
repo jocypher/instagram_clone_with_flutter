@@ -49,6 +49,7 @@ class FireStoreMethods{
         });
       }
     }catch(err){
+      // ignore: avoid_print
       print(err.toString());
     }
   }
@@ -67,9 +68,11 @@ class FireStoreMethods{
 
       });
     }else{
+      // ignore: avoid_print
       print('Text is empty');
     }
     }catch(err){
+      // ignore: avoid_print
       print(err.toString());
     }
   }
@@ -78,6 +81,7 @@ class FireStoreMethods{
     try{
      await _firestore.collection('posts').doc(postId).delete();
     }catch(err){
+      // ignore: avoid_print
       print(err.toString());
     }
   }
@@ -106,6 +110,7 @@ class FireStoreMethods{
         });
       }
     }catch(err){
+      // ignore: avoid_print
       print(err.toString());
     }
 
